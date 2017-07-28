@@ -187,3 +187,20 @@ function init() {
         icon: image
     });
 }
+
+// To stop embedded Google Map from scrolling
+$(document).ready(function () {
+        $('#mapnoscroll').addClass('scrolloff');                // set the mouse events to none when doc is ready
+
+        $('#mapstandin').on("mouseup",function(){          // lock it when mouse up
+            $('#mapnoscroll').addClass('scrolloff');
+            //somehow the mouseup event doesn't get call...
+        });
+        $('#mapstandin').on("mousedown",function(){        // when mouse down, set the mouse events free
+            $('#mapnoscroll').removeClass('scrolloff');
+        });
+        $("#map").mouseleave(function () {              // becuase the mouse up doesn't work...
+            $('#mapnoscroll').addClass('scrolloff');            // set the pointer events to none when mouse leaves the map area
+                                                        // or you can do it on some other event
+        });
+    });
